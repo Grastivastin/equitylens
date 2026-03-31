@@ -105,55 +105,6 @@ Opens browser at `http://localhost:5000` → dashboard loads automatically
 
 ---
 
-## 📡 API Reference
-
-### POST `/predict`
-**Request:**
-```json
-{
-  "ticker": "JPM"
-}
-```
-
-**Response:**
-```json
-{
-  "ticker": "JPM",
-  "current_price": 145.32,
-  "five_day_change_pct": 2.14,
-  "prediction_5d_return": 1.87,
-  "signal": "Buy",
-  "color": "#10B981",
-  "timestamp": "2024-03-31T12:34:56.123456",
-  "features": {
-    "RSI_14": 62.34,
-    "MACD": 0.0234,
-    "BB_Pct_B": 0.72,
-    ...
-  },
-  "latest_ohlcv": {
-    "open": 144.50,
-    "high": 145.89,
-    "low": 144.10,
-    "close": 145.32,
-    "volume": 2340000
-  }
-}
-```
-
-### GET `/health`
-**Response:**
-```json
-{
-  "status": "online",
-  "model_loaded": true,
-  "features": 15,
-  "timestamp": "2024-03-31T12:34:56.123456"
-}
-```
-
----
-
 ## 🛠️ Tech Stack
 
 | Layer | Technology | Why? |
