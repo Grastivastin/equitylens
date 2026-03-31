@@ -1,5 +1,9 @@
 ## 🏦📈 EquityLens
 
+## 🖥️ Demo
+
+![Dashboard Preview](./assets/demo.png)
+
 🚀 A full-stack machine learning system for real-time stock analysis and 5-day return prediction.
 Built as a full-stack ML + fintech dashboard project.
 
