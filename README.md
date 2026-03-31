@@ -1,6 +1,23 @@
-# 🏦  — EquityLens — Multi-Factor Equity Risk & Return Predictor
+# 🏦  — 📈 EquityLens
 
-A production-grade machine learning system that predicts 5-day forward returns using technical momentum signals, volatility regime detection, and walk-forward validated XGBoost model — the same approach used by quantitative research teams at Goldman Sachs, JPMorgan, and other tier-1 fintech institutions.
+🚀 A full-stack machine learning system for real-time stock analysis and 5-day return prediction.
+Built as a full-stack ML + fintech dashboard project.
+
+## ⚡ Overview
+
+EquityLens is a quantitative finance project that predicts short-term stock returns using machine learning and technical indicators.
+
+📊 15 engineered financial features (RSI, MACD, volatility, trend)
+🤖 XGBoost model for non-linear prediction
+🔁 Walk-forward validation (no data leakage)
+🌐 Flask API for real-time inference
+💻 Interactive dashboard for visualization
+
+## 🏗️ Tech Stack
+ML: XGBoost, Scikit-learn
+Backend: Flask (REST API)
+Frontend: HTML, CSS, JavaScript
+Data: Yahoo Finance (yfinance)
 
 **Live Demo:** Coming soon · **Author:** [Your Name] · **GitHub:** [Your GitHub URL]
 
@@ -23,18 +40,6 @@ The result: a model that respects financial time-series logic and can be confide
 
 ---
 
-## 📊 Model Performance
-
-| Metric | Value | Benchmark |
-|--------|-------|-----------|
-| **Model** | XGBoost Regressor | — |
-| **Validation Method** | Walk-Forward CV (5 folds) | Gold standard for time series |
-| **Walk-Forward MAE** | 2.795% ± 0.568% | Low error on future data |
-| **Walk-Forward R²** | -0.0496 ± 0.1067 | Market-efficient (near 0 is expected) |
-| **Training Period** | 2018–2024 (1,760 trading days) | Covers bull, correction, recession |
-| **Training Samples** | 11,942 | Multiple tickers, full history |
-| **Features Engineered** | 15 | Across 5 financial domains |
-| **Models Evaluated** | 3 (XGBoost, Random Forest, Logistic) | Ensemble comparison |
 
 ### 🤖 Why XGBoost?
 
@@ -48,47 +53,6 @@ XGBoost was selected because equity returns are **regime-dependent** — momentu
 
 ---
 
-## 🧠 Feature Engineering — The Financial Story
-
-Each feature is engineered to capture a specific return driver used by institutional investors:
-
-### **Momentum Features** (3)
-| Feature | Formula | Financial Meaning |
-|---------|---------|-------------------|
-| **RSI(14)** | Relative Strength Index | Overbought/oversold extremes → mean reversion signal |
-| **RSI(7)** | Short-term RSI | Captures rapid reversal opportunities |
-| **MACD** | (EMA12 - EMA26) | Trend direction + momentum crossover |
-| **MACD Histogram** | MACD - Signal Line | Momentum acceleration/deceleration |
-
-### **Mean Reversion** (1)
-| Feature | Formula | Financial Meaning |
-|---------|---------|-------------------|
-| **Bollinger %B** | (Price - Lower) / (Upper - Lower) | Position relative to volatility bands; extreme values → reversal |
-
-### **Trend / Regime Detection** (3)
-| Feature | Formula | Financial Meaning |
-|---------|---------|-------------------|
-| **Price vs MA(20)** | (Close - SMA20) / SMA20 | Price vs short-term trend |
-| **Price vs MA(50)** | (Close - SMA50) / SMA50 | Price vs medium-term trend |
-| **MA Crossover** | (MA20 - MA50) / Close | Golden Cross → bullish regime (or vice versa) |
-
-### **Return Features** (3)
-| Feature | Formula | Financial Meaning |
-|---------|---------|-------------------|
-| **1-Day Return** | (Close[t] - Close[t-1]) / Close[t-1] | Immediate momentum |
-| **5-Day Return** | (Close[t] - Close[t-5]) / Close[t-5] | Medium-term momentum |
-| **20-Day Return** | (Close[t] - Close[t-20]) / Close[t-20] | Longer-term trend strength |
-
-### **Volatility / Risk** (3)
-| Feature | Formula | Financial Meaning |
-|---------|---------|-------------------|
-| **ATR %** | ATR(14) / Close | Absolute volatility; signals regime shifts |
-| **20-Day Volatility** | STDEV(returns, 20) | Rolling risk estimate |
-| **Volume Z-Score** | (Volume - MA20) / STDEV | Unusual institutional activity (breakout vs. noise) |
-
-**Why these 15?** Because they mirror what quant researchers at JPMorgan actually monitor. You can explain each one in an interview.
-
----
 
 ## 🏗️ Architecture
 
@@ -214,33 +178,6 @@ stock-market-analyzer/
 ├── features.pkl             # List of 15 feature names (for consistency)
 └── README.md                # This file
 ```
-
----
-
-## 🎓 Interview Talking Points
-
-### "Walk me through your model validation approach"
-> "I used walk-forward cross-validation, not random train/test split. Here's why: random splits assume future price data is available during training — it's not. Walk-forward trains on 2018–2023 data, tests on 2024 data, then rolls forward. This respects time-series logic and prevents data leakage. My 5 folds show consistent MAE of 2.8% ± 0.5%."
-
-### "Why XGBoost over simpler models?"
-> "Stock returns are regime-dependent. During strong trends, momentum works; during corrections, mean reversion works. Linear regression assumes linearity; it fails at regime boundaries. XGBoost captures these non-linear interactions through gradient boosting. I compared 3 models; XGBoost had the lowest MAE."
-
-### "What do your features represent?"
-> "I engineered 15 features across 5 domains that institutional investors monitor: momentum (RSI, MACD), volatility (ATR, Z-score volume), trend (price vs moving averages), mean reversion (Bollinger %B), and returns (1/5/20-day). Each is financially meaningful; I can explain why each matters."
-
-### "How do you handle real-time predictions?"
-> "The API fetches live data from Yahoo Finance, engineers the 15 features on-the-fly, scales them, and runs inference. Latency is ~200–300ms. In production, I'd cache features hourly and use a job queue for batch predictions."
-
----
-
-## 🚀 Next Steps (Production Roadmap)
-
-- [ ] Deploy to AWS/GCP (Gunicorn + Nginx + RDS)
-- [ ] Add batch prediction endpoint (`/predict_batch`)
-- [ ] Integrate with Alpaca API for live trading signals
-- [ ] Add confidence intervals to predictions
-- [ ] Build Streamlit alternative UI for quick prototyping
-- [ ] A/B test against baseline (buy-and-hold)
 
 ---
 
