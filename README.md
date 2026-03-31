@@ -26,22 +26,6 @@ Built as a full-stack ML + fintech dashboard project.
 
 ---
 
-## 🎯 Problem
-
-Predicting short-term stock returns is difficult due to:
-
-* Data leakage in random train/test splits
-* Changing market regimes
-* Non-linear relationships between indicators
-
-**Solution:**
-
-* Walk-forward validation
-* Multi-factor feature engineering
-* Gradient boosting model (XGBoost)
-
----
-
 ## ⚡ How It Works
 
 1. Fetch live stock data
@@ -89,4 +73,3 @@ This project is for educational purposes only. Not financial advice.
 **Sashank Peddada**
 
 GitHub: https://github.com/Grastivastin
-
