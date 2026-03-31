@@ -19,8 +19,6 @@ Backend: Flask (REST API)
 Frontend: HTML, CSS, JavaScript
 Data: Yahoo Finance (yfinance)
 
-**Live Demo:** Coming soon · **Author:** [Your Name] · **GitHub:** [Your GitHub URL]
-
 ---
 
 ## 🎯 The Problem
